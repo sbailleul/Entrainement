@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComicsManager.API", "ComicsManager.API\ComicsManager.API.csproj", "{AC4F4840-82C6-438C-AD33-E97C86F1610B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComicsManager.Common", "ComicsManager.Common\ComicsManager.Common.csproj", "{2DF1D91B-A02D-403D-8A39-B7697F613D3E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComicsManager.Model", "ComicsManager.Model\ComicsManager.Model.csproj", "{AB4E0497-36B5-4950-B0DD-9CECD89A8ECD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AC4F4840-82C6-438C-AD33-E97C86F1610B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC4F4840-82C6-438C-AD33-E97C86F1610B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC4F4840-82C6-438C-AD33-E97C86F1610B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC4F4840-82C6-438C-AD33-E97C86F1610B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DF1D91B-A02D-403D-8A39-B7697F613D3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DF1D91B-A02D-403D-8A39-B7697F613D3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DF1D91B-A02D-403D-8A39-B7697F613D3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DF1D91B-A02D-403D-8A39-B7697F613D3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB4E0497-36B5-4950-B0DD-9CECD89A8ECD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB4E0497-36B5-4950-B0DD-9CECD89A8ECD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB4E0497-36B5-4950-B0DD-9CECD89A8ECD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB4E0497-36B5-4950-B0DD-9CECD89A8ECD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
