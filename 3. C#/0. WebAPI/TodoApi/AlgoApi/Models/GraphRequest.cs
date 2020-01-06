@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 
-namespace TodoApi.Models
+namespace AlgoApi.Models
 {
     public class GraphRequest
     {
-        public List<int[]> matrix { get; set; }
-        public int[] startVector { get; set; }
-        public int[] endVector { get; set; }
+        public List<int[]> Matrix { get; set; }
+        public List<int> StartVector { get; set; }
+        public List<int> EndVector { get; set; }
     }
 }

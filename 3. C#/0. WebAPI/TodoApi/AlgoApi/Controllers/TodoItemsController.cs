@@ -5,9 +5,9 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Threading.Tasks;
+using AlgoApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Internal;
-using TodoApi.Models;
 using EntityState = Microsoft.EntityFrameworkCore.EntityState;
 
 namespace TodoApi.Controllers

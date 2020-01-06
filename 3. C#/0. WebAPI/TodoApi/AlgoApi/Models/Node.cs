@@ -1,14 +1,16 @@
-﻿namespace TodoApi.Models
+﻿using System.Collections.Generic;
+
+namespace AlgoApi.Models
 {
     public class Node
     {
-        public int Id { get; set; }
+        public List<int> Pos { get; set; }
         public Node Parent { get; set; }
         public int Cost { get; set; }
 
-        public Node(int id, Node parent, int cost)
+        public Node(List<int> pos, Node parent, int cost)
         {
-            Id = id;
+            Pos = pos;
             Parent = parent;
             Cost = cost;
         }

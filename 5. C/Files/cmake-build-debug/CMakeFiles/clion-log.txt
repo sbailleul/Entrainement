@@ -1,0 +1,4 @@
+C:\Users\baill\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\192.6262.62\bin\cmake\win\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=C:/MinGW/bin/mingw32-make.exe -DCMAKE_C_COMPILER=C:/MinGW/bin/gcc.exe -G "CodeBlocks - MinGW Makefiles" "C:\Users\baill\OneDrive\Documents\Entrainement\5. C\Files"
+-- Configuring done
+-- Generating done
+-- Build files have been written to: C:/Users/baill/OneDrive/Documents/Entrainement/5. C/Files/cmake-build-debug

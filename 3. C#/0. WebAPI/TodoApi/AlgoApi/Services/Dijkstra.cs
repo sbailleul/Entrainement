@@ -1,84 +1,96 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using TodoApi.Models;
+using AlgoApi.Models;
 
-namespace TodoApi.Services
+namespace AlgoApi.Services
 {
-    public class Dijkstra : IPathFinder
+    public class Dijkstra :  IPathFinder
     {
-        public int[] FindShortestPath(List<int[]> matrix, int[] startVector, int[] endVector)
+        public List<List<int>> FindShortestPath(List<int[]> matrix, List<int> startVector, List<int> endVector)
         {
-            var nodes = new Dictionary<int, Node>();
-            var doneNodes = new Dictionary<int, Node>();
+            var doneNodes = new List<Node>();
             var start = startVector[0];
             var end = endVector[0];
-            
             Node min;
-
-            for (var i = 0; i < matrix.Count; i++)
-            {
-                nodes.Add(i,new Node(i, null,  int.MaxValue));
-            }
-            nodes[start].Cost = 0;
+            var nodes = InitNodes(matrix, startVector);
 
             do
             {
-                min = SwitchNodeList(nodes, doneNodes);
+                min = GetMinimalCostNode(nodes, doneNodes);
 
-                if (min.Id == end)
+                if (min.Pos[0] == end)
                 {
                     break;
                 }
                 UpdateNodes(matrix, min, nodes);
-            } while (nodes.Count>0 && min.Id != end );
+            } while (nodes.Count>0 && min.Pos[0] != end );
             
-            return GetShortestPath(doneNodes, start, end);
+            return GetShortestPath(doneNodes, startVector, endVector);
         }
 
-        private static void UpdateNodes(List<int[]> matrix, Node min, Dictionary<int, Node> nodes)
+        private static List<Node> InitNodes(List<int[]> matrix, List<int> start)
+        {
+            var nodes =  new List<Node>();
+            for (var i = 0; i < matrix.Count; i++)
+            {
+                nodes.Add(new Node(new List<int>{i}, null, int.MaxValue));
+            }
+
+            var startNode = nodes.FirstOrDefault(node => node.Pos.SequenceEqual(start));
+            if (startNode != null)
+            {
+                startNode.Cost = 0;
+            }
+            return nodes;
+        }
+
+        private static void UpdateNodes(List<int[]> matrix, Node min, List<Node> nodes)
         {
             if (matrix == null) throw new ArgumentNullException(nameof(matrix));
             if (min == null) throw new ArgumentNullException(nameof(min));
             if (nodes == null) throw new ArgumentNullException(nameof(nodes));
             
-            for (var i = 0; i < matrix[min.Id].Length; i++)
+            for (var i = 0; i < matrix[min.Pos[0]].Length; i++)
             {
-                if (matrix[min.Id][i] == 0 || (min.Parent != null && min.Parent.Id == i)) continue;
-                var tmpCost = min.Cost + matrix[min.Id][i];
-                if (!nodes.ContainsKey(i) || nodes[i].Cost < tmpCost) continue;
-                nodes[i].Cost = tmpCost;
-                nodes[i].Parent = min;
+                if (matrix[min.Pos[0]][i] == 0 || (min.Parent != null && min.Parent.Pos[0] == i)) continue;
+                var tmpCost = min.Cost + matrix[min.Pos[0]][i];
+                var updatedNode = nodes.FirstOrDefault(node => node.Pos.SequenceEqual(new List<int>{i}));
+                if ( updatedNode == null || updatedNode.Cost < tmpCost) continue;
+                updatedNode.Cost = tmpCost;
+                updatedNode.Parent = min;
             }
         }
 
-        private static int[] GetShortestPath(IReadOnlyDictionary<int, Node> nodes, int start, int end)
+        private static List<List<int>> GetShortestPath(IReadOnlyList<Node> nodes, List<int> start, List<int> end)
         {
-            var shortestPath = new List<int>();
-            var node = nodes[end];
-
-            while (node.Id != start)
+            var shortestPath = new List<List<int>>();
+            var node = nodes.FirstOrDefault(nodeEl => nodeEl.Pos.SequenceEqual(end));
+            
+            while (node != null && !node.Pos.SequenceEqual(start))
             {
-                shortestPath.Add(node.Id);
+                shortestPath.Add(node.Pos);
                 node = node.Parent;
             }
-            shortestPath.Add(node.Id);
-            return shortestPath.ToArray();
+
+            if (node != null) shortestPath.Add(node.Pos);
+
+            return shortestPath;
         }
 
-        private static Node SwitchNodeList(Dictionary<int, Node> nodes, Dictionary<int, Node> doneNodes)
+        private static Node GetMinimalCostNode(List<Node> nodes, List<Node> doneNodes)
         {
             if (nodes == null) throw new ArgumentNullException(nameof(nodes));
             if (doneNodes == null) throw new ArgumentNullException(nameof(doneNodes));
             
-            var min = nodes.First().Value;
+            var min = nodes.First();
             
-            foreach (var (key, value) in nodes.Where(node => node.Value.Cost < min.Cost))
+            foreach (var node in nodes.Where(node => node.Cost < min.Cost))
             {
-                min = value;
+                min = node;
             }
-            nodes.Remove(min.Id);
-            doneNodes.Add(min.Id,min);
+            nodes.Remove(min);
+            doneNodes.Add(min);
             
             return min;
         }
